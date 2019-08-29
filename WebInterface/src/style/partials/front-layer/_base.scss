@@ -1,3 +1,5 @@
+@import "../_colors.scss";
+
 .front-layer {
   @keyframes start {
     from {top: 100vh;}
@@ -11,12 +13,12 @@
   height: 100%;
 
   box-sizing: border-box;
-  background-color: white;
+  background-color: $front-bg;
   margin-top: 8px;
   animation-name: start;
   animation-duration: 1s;
   animation-timing-function: ease;
-  color: black;
+  color: $front-text;
 
   display: flex;
   flex-direction: column;

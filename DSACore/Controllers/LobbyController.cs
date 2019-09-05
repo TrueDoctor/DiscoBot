@@ -4,7 +4,7 @@ using DSALib.Models.Network;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DSACore.Controllers {
-    public class ScribbleController : Controller {
+    public class LobbyController : Controller {
         [Route("[controller]")]
         // GET: api/<controller>
         [HttpGet]
@@ -21,5 +21,9 @@ namespace DSACore.Controllers {
                 return $"Ein Fehler ist aufgetreten: \n {e.Message}";
             }
         }
+
+        // post new lobby
+        // get list lobbys
+        // get lobby
     }
 }

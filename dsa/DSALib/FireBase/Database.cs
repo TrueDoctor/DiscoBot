@@ -194,17 +194,13 @@ namespace DSALib.FireBase {
                 .OnceSingleAsync<Weapon>();
         }
 
-        public static async Task<List<Tuple<string, string>>> GetGroups() {
+        public static async Task<List<Group>> GetGroups() {
             var groups = await Firebase
                 .Child("Groups")
                 .OrderByKey()
                 .OnceAsync<Group>();
-            var ret = new List<Tuple<string, string>>();
 
-            foreach (var firebaseObject in groups)
-                ret.Add(new Tuple<string, string>(firebaseObject.Object.Name, firebaseObject.Object.Password));
-
-            return ret;
+            return groups.Select(x => x.Object).ToList();
         }
 
         public static async Task<Group> GetGroup(int id) {

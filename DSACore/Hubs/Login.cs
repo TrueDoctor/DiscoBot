@@ -18,7 +18,8 @@ namespace DSACore.Hubs {
         private const string ReceiveMethod = "ReceiveMessage"; //receiveMethod;
 
         static Users() {
-            DsaGroups = Database.GetGroups().Result.Select(x => new Group(x.Item1, x.Item2)).ToList();
+            DsaGroups = Database.GetGroups().Result.Select(x => new Group(x.Name, x.Password)).ToList();
+
             DsaGroups.Add(new Group("login", ""));
             DsaGroups.Add(new Group("online", ""));
             //AddGroups();
@@ -80,17 +81,17 @@ namespace DSACore.Hubs {
         }
 
         private Group getGroup(string id) {
-            return DsaGroups.First(x => x.Users.Exists(y => y.ConnectionId.Equals(id)));
+            return DsaGroups.First(x => x.Users.Exists(y => y.Name.Equals(id)));
         }
 
         private User getUser(string id) {
-            return DsaGroups.First(x => x.Users.Exists(y => y.ConnectionId.Equals(id))).Users
-                .First(z => z.ConnectionId.Equals(id));
+            return DsaGroups.First(x => x.Users.Exists(y => y.Name.Equals(id))).Users
+                .First(z => z.Name.Equals(id));
         }
 
         public async Task GetGroups() {
             var test = await Database.GetGroups();
-            foreach (var group in test.Select(x => new Group(x.Item1, x.Item2)).ToList())
+            foreach (var group in test.Select(x => new Group(x.Name, x.Password)).ToList())
                 if (!DsaGroups.Exists(x => x.Name.Equals(group.Name)))
                     DsaGroups.Add(group);
 
@@ -120,12 +121,14 @@ namespace DSACore.Hubs {
                 if (!gGroup.Users.Exists(x => x.Name.Equals(user))) {
                     await Groups.RemoveFromGroupAsync(Context.ConnectionId, "login");
                     await Groups.AddToGroupAsync(Context.ConnectionId, group);
-                    gGroup.Users.Add(new User {ConnectionId = Context.ConnectionId, Name = user});
+                    gGroup.Users.Add(new User {
+                        /*Name = Context.ConnectionId,*/ Name = user
+                    });
                     await SendToGroup("Ein neuer Nutzer hat die Gruppe betreten");
                     await Clients.Caller.SendAsync("LoginResponse", 0);
                     await Clients.Caller.SendAsync("PlayerStatusChanged", new[] {user, "online"});
 
-                    Tokens.Add(new Token(group));
+                    Tokens.Add(new Token(new Group(group, 0)));
                     await Clients.Caller.SendAsync("Token", Tokens.Last().GetHashCode());
                     purgeTokens();
                 }
@@ -156,7 +159,8 @@ namespace DSACore.Hubs {
 
         public async Task Disconnect() {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, "online");
-            if (DsaGroups.Exists(x => x.Users.Exists(y => y.ConnectionId == Context.ConnectionId)))
+
+            if (DsaGroups.Exists(x => x.Users.Exists(y => y.Name == Context.ConnectionId)))
                 try {
                     var group = getGroup(Context.ConnectionId);
 

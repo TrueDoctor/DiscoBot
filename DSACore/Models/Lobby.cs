@@ -14,12 +14,14 @@ namespace DSACore.Models {
 
         private static List<Token> Tokens { get; } = new List<Token>();
 
-        public static void AddGroup(Group group) {
-            Groups.Add(group);
+        public static void AddGroup(DSALib.Models.Database.Groups.Group group) {
+            Groups.Add(new Group(group));
+            Database.AddGroup(group);
         }
 
         public static void DeleteGroup(int id) {
             Groups.Remove(Groups.Find(x => x.Id == id));
+            Database.DeleteGroup(id);
         }
 
         public static SendGroup GetGroup(int id) {

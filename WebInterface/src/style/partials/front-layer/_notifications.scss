@@ -1,10 +1,13 @@
 @import '../colors';
 
+$banner-border-radius: 16px 16px 0 0;
+
 .front-layer {
   .banner {
-    background-color: white;
+    background-color: $background;
+    color: $background-text;
     border: none;
-    border-radius: 16px 16px 0 0;
+    border-radius: $banner-border-radius;
     display: flex;
     margin: 0;
     margin-bottom: 1rem;

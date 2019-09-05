@@ -1,3 +1,8 @@
+@import "../_colors.scss";
+
+// Rounded edges top-left, top-right, bottom-right, bottom-left
+$border-radius: 8px 8px 0 0;
+
 .front-layer {
   @keyframes start {
     from {top: 100vh;}
@@ -6,17 +11,17 @@
 
   position: relative;
   border: none;
-  border-radius: 16px 16px 0 0;
+  border-radius: $border-radius;
   min-height: 0;
   height: 100%;
 
   box-sizing: border-box;
-  background-color: white;
+  background-color: $background;
   margin-top: 8px;
   animation-name: start;
   animation-duration: 1s;
   animation-timing-function: ease;
-  color: black;
+  color: $background-text;
 
   display: flex;
   flex-direction: column;

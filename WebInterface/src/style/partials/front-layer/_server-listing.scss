@@ -1,5 +1,7 @@
 @import '../colors';
 
+$listing-border-radius: 8px;
+
 .front-layer {
   .server-listing {
     box-sizing: border-box;
@@ -9,7 +11,7 @@
     display: flex;
     flex-direction: column;
     border-style: none;
-    border-radius: 8px;
+    border-radius: $listing-border-radius;
     margin: 1rem;
     margin-bottom: 2rem;
     padding: 0.5rem;

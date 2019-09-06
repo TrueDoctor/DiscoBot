@@ -38,10 +38,9 @@ namespace DSACore {
 
             app.UseCors("CorsPolicy");
             app.UseSwagger();
-            app.UseSignalR(routes => { routes.MapHub<Users>("/login"); });
+            app.UseSignalR(routes => { routes.MapHub<Users>("/api/login"); });
             app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/api/swagger/v1/swagger.json", "Lobby API");
-                c.RoutePrefix = "api/swagger";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lobby API");
             });
             app.UseWebSockets();
 

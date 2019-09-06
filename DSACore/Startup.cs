@@ -17,12 +17,11 @@ namespace DSACore {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSignalR();
             // In ConfigureServices
-            services.AddSwaggerGen(c =>
-            {
+            services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo {
                     Title = "Lobby API",
                     Version = "v1"
@@ -41,7 +40,7 @@ namespace DSACore {
             app.UseSwagger();
             app.UseSignalR(routes => { routes.MapHub<Users>("/login"); });
             app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lobby API");
+                c.SwaggerEndpoint("/api/swagger/v1/swagger.json", "Lobby API");
             });
             app.UseWebSockets();
 

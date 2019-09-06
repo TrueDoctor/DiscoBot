@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace DSACore.Controllers {
-    [Route("dsa/[controller]")]
+    [Route("api/dsa/[controller]")]
     public class CommandsController : Controller {
         // GET: api/<controller>
         [HttpGet]

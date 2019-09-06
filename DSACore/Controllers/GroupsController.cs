@@ -5,7 +5,7 @@ using DSACore.Models.Network;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DSACore.Controllers {
-    [Route("lobby/[controller]")]
+    [Route("api/lobby/[controller]")]
     [ApiController]
     public class GroupsController : Controller {
         // GET

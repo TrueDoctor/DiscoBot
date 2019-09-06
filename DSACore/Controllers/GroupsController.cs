@@ -9,6 +9,7 @@ namespace DSACore.Controllers {
     [ApiController]
     public class GroupsController : Controller {
         // GET
+        [HttpGet]
         public ActionResult<IEnumerable<SendGroup>> Get() {
             try {
                 return Ok(Lobby.GetGroups());
@@ -30,11 +31,12 @@ namespace DSACore.Controllers {
         }
 
         [HttpPost]
-        public ActionResult<SendGroup> Post(Group group) {
+        public ActionResult<SendGroup> Post([FromBody]DSALib.Models.Database.Groups.Group group) {
             var maxId = Lobby.Groups.Max(x => x.Id);
             group.Id = maxId + 1;
+            var dataGroup = new Group(group);
             Lobby.AddGroup(group);
-            return Ok(group.SendGroup());
+            return Ok(dataGroup.SendGroup());
         }
 
         [HttpPost("{id}")]

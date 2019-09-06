@@ -4,8 +4,9 @@ using DSALib.Models.Network;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DSACore.Controllers {
+    [Route("[controller]")]
     public class LobbyController : Controller {
-        [Route("[controller]")]
+        
         // GET: api/<controller>
         [HttpGet]
         public string Get() {

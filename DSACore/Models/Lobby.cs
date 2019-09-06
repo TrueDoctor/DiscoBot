@@ -27,6 +27,12 @@ namespace DSACore.Models {
         public static SendGroup GetGroup(int id) {
             return Groups.Find(x => x.Id == id).SendGroup();
         }
+        
+        public static SendGroup GetGroupByToken(int token) {
+            var groupToken = Tokens.Find(x => x.GetHashCode() == token);
+            Tokens.Remove(groupToken);
+            return groupToken.Group.SendGroup();
+        }
 
         public static IEnumerable<SendGroup> GetGroups() {
             return Groups.Select(x => x.SendGroup());
@@ -46,6 +52,7 @@ namespace DSACore.Models {
             var group = Groups.First(x => x.Id == groupId);
             if (!group.Password.Equals(password)) throw new Exception("Invalid Password");
             var token = new Token(group);
+            Tokens.Add(token);
             PurgeTokens();
             return token.GetHashCode();
         }

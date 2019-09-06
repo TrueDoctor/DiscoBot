@@ -11,7 +11,7 @@ namespace DSACore.Models.Network {
         public Group Group { get; set; }
 
         public bool IsValid() {
-            return DateTime.Now - creation < TimeSpan.FromMinutes(1);
+            return DateTime.Now - creation < TimeSpan.FromMinutes(5);
         }
     }
 }

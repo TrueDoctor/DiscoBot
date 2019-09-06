@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore;
 
 namespace DSACore {
     public class Startup {
@@ -18,6 +20,14 @@ namespace DSACore {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSignalR();
+            // In ConfigureServices
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo {
+                    Title = "Example API",
+                    Version = "v1"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,13 +38,15 @@ namespace DSACore {
                 app.UseHsts();
 
             app.UseCors("CorsPolicy");
-
+            app.UseSwagger();
             app.UseSignalR(routes => { routes.MapHub<Users>("/login"); });
-
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Example API v1");
+            });
             app.UseWebSockets();
 
             //app.UseCors("AllowSpecificOrigin");
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

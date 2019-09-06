@@ -24,7 +24,7 @@ namespace DSACore {
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {
-                    Title = "Example API",
+                    Title = "Lobby API",
                     Version = "v1"
                 });
             });
@@ -41,12 +41,12 @@ namespace DSACore {
             app.UseSwagger();
             app.UseSignalR(routes => { routes.MapHub<Users>("/login"); });
             app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Example API v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lobby API");
             });
             app.UseWebSockets();
 
             //app.UseCors("AllowSpecificOrigin");
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

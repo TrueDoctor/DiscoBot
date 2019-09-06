@@ -41,6 +41,7 @@ namespace DSACore {
             app.UseSignalR(routes => { routes.MapHub<Users>("/login"); });
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/api/swagger/v1/swagger.json", "Lobby API");
+                c.RoutePrefix = "api/swagger";
             });
             app.UseWebSockets();
 

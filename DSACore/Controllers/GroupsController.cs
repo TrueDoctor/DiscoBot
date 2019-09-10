@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DSACore.Models;
 using DSACore.Models.Network;
-using Microsoft.AspNetCore.Cors;
+using DSALib.FireBase;
+using DSALib.Models.Database.Groups;
 using Microsoft.AspNetCore.Mvc;
+using Group = DSACore.Models.Network.Group;
 
 namespace DSACore.Controllers {
     [Route("api/lobby/[controller]")]
@@ -11,9 +14,9 @@ namespace DSACore.Controllers {
     public class GroupsController : Controller {
         // GET
         [HttpGet]
-        public ActionResult<IEnumerable<SendGroup>> Get() {
+        public ActionResult<GroupResponse> Get() {
             try {
-                return Ok(Lobby.GetGroups());
+                return Ok(new GroupResponse{ Games = Lobby.GetGroups(), GameTypes = Database.GetGroupTypes().Result});
             }
             catch {
                 return NotFound("Error retriving Groups");

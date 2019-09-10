@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DSACore.Controllers {
     [Route("api/[controller]")]
-    [DisableCors]
     public class LobbyController : Controller {
         
         // GET: api/<controller>

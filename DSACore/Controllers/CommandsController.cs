@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DSACore.Controllers {
     [Route("api/dsa/[controller]")]
-    [DisableCors]
     public class CommandsController : Controller {
         // GET: api/<controller>
         [HttpGet]

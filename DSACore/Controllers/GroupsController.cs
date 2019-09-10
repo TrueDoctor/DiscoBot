@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace DSACore.Controllers {
     [Route("api/lobby/[controller]")]
     [ApiController]
-    [DisableCors]
     public class GroupsController : Controller {
         // GET
         [HttpGet]

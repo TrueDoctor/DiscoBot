@@ -202,6 +202,15 @@ namespace DSALib.FireBase {
 
             return groups.Select(x => x.Object).ToList();
         }
+        
+        public static async Task<List<GroupType>> GetGroupTypes() {
+            var groups = await Firebase
+                .Child("GroupTypes")
+                .OrderByKey()
+                .OnceAsync<GroupType>();
+
+            return groups.Select(x => x.Object).ToList();
+        }
 
         public static async Task<Group> GetGroup(int id) {
             var group = await Firebase

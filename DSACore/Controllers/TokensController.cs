@@ -1,11 +1,13 @@
 using DSACore.Hubs;
 using DSACore.Models;
 using DSACore.Models.Network;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DSACore.Controllers {
     [Route("api/lobby/[controller]")]
     [ApiController]
+    [DisableCors]
     public class TokensController : Controller {
         // GET
         [HttpGet("{token}")]

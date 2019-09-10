@@ -1,10 +1,12 @@
 using System;
 using DSALib.Commands;
 using DSALib.Models.Network;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DSACore.Controllers {
     [Route("api/[controller]")]
+    [DisableCors]
     public class LobbyController : Controller {
         
         // GET: api/<controller>

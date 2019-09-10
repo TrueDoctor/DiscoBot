@@ -45,7 +45,7 @@ namespace DSACore {
             else
                 app.UseHsts();
 
-            app.UseCors("CorsPolicy");
+            app.UseCors("Dev");
             app.UseSwagger();
             app.UseSignalR(routes => { routes.MapHub<Users>("/api/login"); });
             app.UseSwaggerUI(c => {

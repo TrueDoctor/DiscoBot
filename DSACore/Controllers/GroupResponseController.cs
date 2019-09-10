@@ -1,16 +1,18 @@
 using System.Collections.Generic;
+using DSACore.Models;
+using DSACore.Models.Network;
 using DSALib.FireBase;
 using DSALib.Models.Database.Groups;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DSACore.Controllers {
+namespace DSACore.Controllers { 
     [Route("api/lobby/[controller]")]
     [ApiController]
-    public class Types : Controller {
+    public class GroupResponseController : Controller {
         // GET
         [HttpGet]
-        public List<GroupType> Get() {
-            return Database.GetGroupTypes().Result;
+        public GroupResponse Get() {
+            return Lobby.GetGroupResponse();
         }
     }
 }

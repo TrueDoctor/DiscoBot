@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using DSACore.Models.Network;
 using DSALib.FireBase;
+using DSALib.Models.Database.Groups;
+using Group = DSACore.Models.Network.Group;
 
 namespace DSACore.Models {
     public static class Lobby {
-        public static readonly List<Group> Groups;
+        public static List<Group> Groups;
+        public static readonly List<GroupType> GroupTypes;
 
         static Lobby() {
             Groups = Database.GetGroups().Result.Select(x => new Group(x)).ToList();
+            GroupTypes = Database.GetGroupTypes().Result.ToList();
         }
 
         private static List<Token> Tokens { get; } = new List<Token>();
@@ -37,7 +41,11 @@ namespace DSACore.Models {
         public static IEnumerable<SendGroup> GetGroups() {
             return Groups.Select(x => x.SendGroup());
         }
-
+        
+        public static IEnumerable<GroupType> GetGroupTypes() {
+            return GroupTypes;
+        }
+        
         public static void ChangeGroupName(string name, int groupId) {
             Groups.Find(x => x.Id == groupId).Name = name;
         }
@@ -64,6 +72,10 @@ namespace DSACore.Models {
 
         private static void PurgeTokens() {
             Tokens.RemoveAll(x => !x.IsValid());
+        }
+
+        public static GroupResponse GetGroupResponse() {
+            return new GroupResponse {Games = Lobby.GetGroups(), GameTypes = Database.GetGroupTypes().Result};
         }
     }
 }

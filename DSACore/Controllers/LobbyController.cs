@@ -1,4 +1,6 @@
 using System;
+using DSACore.Models;
+using DSACore.Models.Network;
 using DSALib.Commands;
 using DSALib.Models.Network;
 using Microsoft.AspNetCore.Cors;
@@ -10,8 +12,8 @@ namespace DSACore.Controllers {
         
         // GET: api/<controller>
         [HttpGet]
-        public string Get() {
-            return "Usage: get /tokens/{Token}";
+        public GroupResponse Get() {
+            return Lobby.GetGroupResponse();
         }
 
         [HttpPost]

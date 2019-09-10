@@ -14,9 +14,9 @@ namespace DSACore.Controllers {
     public class GroupsController : Controller {
         // GET
         [HttpGet]
-        public ActionResult<GroupResponse> Get() {
+        public ActionResult<IEnumerable<SendGroup>> Get() {
             try {
-                return Ok(new GroupResponse{ Games = Lobby.GetGroups(), GameTypes = Database.GetGroupTypes().Result});
+                return Ok(Lobby.GetGroups());
             }
             catch {
                 return NotFound("Error retriving Groups");

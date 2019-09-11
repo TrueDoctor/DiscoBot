@@ -19,7 +19,7 @@ namespace DSACore {
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddSignalR();
+            //services.AddSignalR();
             // In ConfigureServices
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo {
@@ -47,7 +47,7 @@ namespace DSACore {
 
             app.UseCors("Dev");
             app.UseSwagger();
-            app.UseSignalR(routes => { routes.MapHub<Users>("/api/login"); });
+            //app.UseSignalR(routes => { routes.MapHub<Users>("/api/login"); });
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lobby API");
             });

@@ -32,10 +32,11 @@ namespace DSACore.Models {
             return Groups.Find(x => x.Id == id).SendGroup();
         }
         
-        public static SendGroup GetGroupByToken(int token) {
+        public static TokenResponse GetGroupByToken(int token) {
             var groupToken = Tokens.Find(x => x.GetHashCode() == token);
             Tokens.Remove(groupToken);
-            return groupToken.Group.SendGroup();
+            groupToken.Group.Users.Add(new User{Name = groupToken.Name});
+            return groupToken.Group.TokenResponse(groupToken.Name);
         }
 
         public static IEnumerable<SendGroup> GetGroups() {
@@ -56,10 +57,10 @@ namespace DSACore.Models {
             users.Remove(toRemove);
         }
 
-        public static int GenerateToken(int groupId, string password) {
+        public static int GenerateToken(int groupId, LoginRequest request) {
             var group = Groups.First(x => x.Id == groupId);
-            if (!group.Password.Equals(password)) throw new Exception("Invalid Password");
-            var token = new Token(group);
+            if (!group.Password.Equals(request.Password)) throw new Exception("Invalid Password");
+            var token = new Token(group, request.Name);
             Tokens.Add(token);
             PurgeTokens();
             return token.GetHashCode();

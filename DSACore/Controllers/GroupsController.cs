@@ -44,8 +44,8 @@ namespace DSACore.Controllers {
         }
 
         [HttpPost("{id}")]
-        public ActionResult<int> Post(int id, [FromBody] string password) {
-            var token = Lobby.GenerateToken(id, password);
+        public ActionResult<int> Post(int id, [FromBody] LoginRequest request) {
+            var token = Lobby.GenerateToken(id, request);
             return Ok(token);
         }
 

@@ -128,7 +128,7 @@ namespace DSACore.Hubs {
                     await Clients.Caller.SendAsync("LoginResponse", 0);
                     await Clients.Caller.SendAsync("PlayerStatusChanged", new[] {user, "online"});
 
-                    Tokens.Add(new Token(new Group(group, 0)));
+                    //Tokens.Add(new Token(new Group(@group, 0)));
                     await Clients.Caller.SendAsync("Token", Tokens.Last().GetHashCode());
                     purgeTokens();
                 }

@@ -33,6 +33,14 @@ namespace DSACore.Models.Network {
                 MaxUsers = Capacity, HasPassword = Password.Length != 0, Type = Type, Id = Id
             };
         }
+        
+        public TokenResponse TokenResponse(string name) {
+            return new TokenResponse {
+                Name = Name, UserCount = UserCount,
+                MaxUsers = Capacity, HasPassword = Password.Length != 0, Type = Type, Id = Id,
+                Username = name
+            };
+        }
     }
 
     public class SendGroup {

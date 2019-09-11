@@ -8,7 +8,7 @@ namespace DSACore.Controllers {
     public class TokensController : Controller {
         // GET
         [HttpGet("{token}")]
-        public ActionResult<SendGroup> Get(string token) {
+        public ActionResult<TokenResponse> Get(string token) {
             if (!int.TryParse(token, out var intToken))
                 return BadRequest("The token has to be a 32 bit signed integer");
 

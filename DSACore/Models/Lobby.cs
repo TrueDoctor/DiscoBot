@@ -5,6 +5,7 @@ using DSACore.Models.Network;
 using DSALib.FireBase;
 using DSALib.Models.Database.Groups;
 using Group = DSACore.Models.Network.Group;
+using   Microsoft.AspNetCore.Mvc;
 
 namespace DSACore.Models {
     public static class Lobby {
@@ -60,6 +61,7 @@ namespace DSACore.Models {
         public static int GenerateToken(int groupId, LoginRequest request) {
             var group = Groups.First(x => x.Id == groupId);
             if (!group.Password.Equals(request.Password)) throw new Exception("Invalid Password");
+            if (group.Users.Any(x => x.Name.Equals(request.Name))) throw new Exception("Username already taken");
             var token = new Token(group, request.Name);
             Tokens.Add(token);
             PurgeTokens();

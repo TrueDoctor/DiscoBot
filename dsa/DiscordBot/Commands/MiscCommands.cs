@@ -20,11 +20,53 @@ namespace DiscrdoBot.Commands
             //return this.ReplyAsync("```xl\n" + new Auxiliary.Calculator.StringSolver(roll).Solve() + "\n```");
             return ReplyAsync("```xl\n" + RandomMisc.Roll(roll) + "\n```");
         }
+        
+        [Command("hack")]
+        [Summary("Hacken")]
+        [Alias("hacken", "Hacken", "Hack")]
+        public Task HackAsync()
+        {
+            //return this.ReplyAsync("```xl\n" + new Auxiliary.Calculator.StringSolver(roll).Solve() + "\n```");
+            var response = RandomMisc.Roll("7w6");
+            return ReplyAsync("```xl\n" + response + "\nhits:" + response.Count(x=>x == '5' || x == '6') + "\n```");
+        }
 
+        [Command("clean")]
+        public Task CleanAsync(int count)
+        {
+            var messagesAsync = Context.Channel.GetMessagesAsync(count);
+            if (messagesAsync != null)
+            {
+                Task.WaitAll(messagesAsync.ToArray());
+                var list = messagesAsync.ToEnumerable().ToList();
+                var messages = new List<IMessage>();
+                foreach (var task in list) messages.AddRange(task.ToList());
+
+                if (Permissions.Check(Context, new[] {"Admin", "Mod", "Meister"}))
+                {
+                    var waiters = new List<Task>();
+                    foreach (var message in messages) waiters.Add(((IUserMessage) message).DeleteAsync());
+
+                    Task.WaitAll(waiters.ToArray());
+                }
+            }
+
+            return null;
+        }
+
+        [Command("s")]
+        public Task HitsAsync(int roll)
+        {
+            //return this.ReplyAsync("```xl\n" + new Auxiliary.Calculator.StringSolver(roll).Solve() + "\n```");
+            var response = RandomMisc.Roll(roll + "w6");
+            var crit = response.Count(x => x == '1') * 2 >= roll ? "\nKritischer Misserfolg!!!" : "";
+            return ReplyAsync("```xl\n" + response + "\nhits:" + response.Count(x=>x == '5' || x == '6')
+                              + crit +"\n```");
+        }
 
         [Command("say")]
         [Summary("Echos a message.")]
-        [Alias("s")]
+        //[Alias("s")]
         public Task SayAsync([Remainder] [Summary("The text to echo")]
             string echo)
         {

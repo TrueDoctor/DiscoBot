@@ -60,8 +60,8 @@ namespace DSACore.Models {
 
         public static int GenerateToken(int groupId, LoginRequest request) {
             var group = Groups.First(x => x.Id == groupId);
-            if (!group.Password.Equals(request.Password)) throw new Exception("Invalid Password");
-            if (group.Users.Any(x => x.Name.Equals(request.Name))) throw new Exception("Username already taken");
+            if (!group.Password.Equals(request.Password)) throw new Exception("pass");
+            if (group.Users.Any(x => x.Name.Equals(request.Name))) throw new Exception("name");
             var token = new Token(group, request.Name);
             Tokens.Add(token);
             PurgeTokens();

@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSALib", "DSALib\DSALib.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnitTest", "NUnitTestProject1\NUnitTest.csproj", "{CF821E64-B50E-420F-98A2-07315B362ED0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscoBot", "DiscoBot\DiscoBot.csproj", "{1186AF1C-BC46-4B3D-BEE0-CE478B8AEAC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot", "DiscordBot\DiscordBot.csproj", "{5ED14ECF-EBD2-404E-BDFB-FD49B27A0E44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{CF821E64-B50E-420F-98A2-07315B362ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF821E64-B50E-420F-98A2-07315B362ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF821E64-B50E-420F-98A2-07315B362ED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1186AF1C-BC46-4B3D-BEE0-CE478B8AEAC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1186AF1C-BC46-4B3D-BEE0-CE478B8AEAC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1186AF1C-BC46-4B3D-BEE0-CE478B8AEAC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1186AF1C-BC46-4B3D-BEE0-CE478B8AEAC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ED14ECF-EBD2-404E-BDFB-FD49B27A0E44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ED14ECF-EBD2-404E-BDFB-FD49B27A0E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ED14ECF-EBD2-404E-BDFB-FD49B27A0E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ED14ECF-EBD2-404E-BDFB-FD49B27A0E44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

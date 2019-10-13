@@ -78,7 +78,7 @@ namespace DSACore.Models {
         }
 
         public static GroupResponse GetGroupResponse() {
-            return new GroupResponse {Games = Lobby.GetGroups(), GameTypes = Database.GetGroupTypes().Result};
+            return new GroupResponse {Games = Lobby.GetGroups(), GameTypes = GroupTypes};
         }
     }
 }
